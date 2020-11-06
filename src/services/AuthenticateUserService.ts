@@ -1,10 +1,10 @@
 import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { classToClass } from 'class-transformer';
+
 import authConfig from '../config/auth';
-
 import AppError from '../errors/AppError';
-
 import User from '../models/User';
 
 interface Request {
@@ -43,7 +43,7 @@ class AuthenticateUserService {
     });
 
     return {
-      user,
+      user: classToClass(user),
       token,
     };
   }
